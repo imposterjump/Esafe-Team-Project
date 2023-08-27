@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Esafe-Team-Project.props" />
+</Project>
