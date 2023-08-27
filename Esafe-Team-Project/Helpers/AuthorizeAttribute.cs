@@ -28,6 +28,7 @@ namespace Esafe_Team_Project.Helpers
             {
 
                 // not logged in or role not authorized
+                //addComment
                 context.Result = new JsonResult(new { message = "Unauthorized, Access Denied" }) { StatusCode = StatusCodes.Status401Unauthorized };
 
             }
