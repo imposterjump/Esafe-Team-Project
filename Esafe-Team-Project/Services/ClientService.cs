@@ -13,6 +13,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Esafe_Team_Project.Models;
 
 namespace Esafe_Team_Project.Services
 {
@@ -338,6 +339,44 @@ namespace Esafe_Team_Project.Services
             {
                 return null;
             }
+        }
+
+
+
+
+
+        public async Task<List<CreditCardDto>> GetCreditDets(Client client)
+        {
+            List<CreditCard> cards = await _dbContext.CreditCards.Where(_ => _.ClientId == client.Id).ToListAsync();
+            if (cards != null)
+            {
+                List<CreditCardDto> cardsdto = _mapper.Map<List<CreditCardDto>>(cards);
+                return cardsdto;
+            }
+            else
+            {
+                Console.WriteLine("this client has no credit cards");
+                return null;
+            }
+
+
+        }
+
+        public async Task<List<CertificateDto>> GetCertificateDets(Client client)
+        {
+            List<Certificate> cert = await _dbContext.Certificates.Where(_ => _.ClientId == client.Id).ToListAsync();
+            if (cert != null)
+            {
+                List<CertificateDto> certsdto = _mapper.Map<List<CertificateDto>>(cert);
+                return certsdto;
+            }
+            else
+            {
+                Console.WriteLine("this client has no certificates");
+                return null;
+            }
+
+
         }
 
     }

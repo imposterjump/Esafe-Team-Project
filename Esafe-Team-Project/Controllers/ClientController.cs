@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Esafe_Team_Project.Data;
+using Esafe_Team_Project.Data.Enums;
 using Esafe_Team_Project.Entities;
 using Esafe_Team_Project.Helpers;
+using Esafe_Team_Project.Models;
 using Esafe_Team_Project.Models.Address;
 using Esafe_Team_Project.Models.Client.Request;
 using Esafe_Team_Project.Models.Client.Response;
@@ -213,5 +215,62 @@ namespace Esafe_Team_Project.Controllers
             return data;
 
         }
+
+
+
+
+        [Authorize(Role.Client)]
+        [HttpGet("GetCreditCards")]
+        public async Task<ActionResult<List<CreditCardDto>>> GetCreditCardDetails()
+        {
+            try
+            {
+                var client = Client;
+                List<CreditCardDto> cards = await _service.GetCreditDets(client);
+                if (cards != null)
+                {
+                    return Ok(cards);
+                }
+                else
+                {
+                    return NotFound("You don't have any credit cards");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, ex.Message);
+
+            }
+        }
+
+        [Authorize(Role.Client)]
+        [HttpGet("GetCertificates")]
+        public async Task<ActionResult<List<CertificateDto>>> GetCertificateDetails()
+        {
+            try
+            {
+                var client = Client;
+                List<CertificateDto> cards = await _service.GetCertificateDets(client);
+                if (cards != null)
+                {
+                    return Ok(cards);
+                }
+                else
+                {
+                    return NotFound("You don't have any certificates");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, ex.Message);
+
+            }
+        }
     }
+
+
+
+
 }

@@ -2,9 +2,8 @@
 {
     public enum CreditCardType
     {
-        Credit,
-        Debit,
-        CreditCashBack,
-        Exclusive
+        Silver,
+        Gold,
+        Platinum
     }
 }
