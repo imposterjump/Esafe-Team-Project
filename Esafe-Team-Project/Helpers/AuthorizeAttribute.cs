@@ -9,7 +9,7 @@ namespace Esafe_Team_Project.Helpers
     public class AuthorizeAttribute : Attribute, IAuthorizationFilter
     {
         public Role role { get; set; }
-
+        // added comment here 
         public AuthorizeAttribute(Role _role)
         {
             this.role = _role;
