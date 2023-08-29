@@ -8543,19 +8543,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\shahd\\.nuget\\packages\\": {}
+    "C:\\Users\\HANI\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VS 2022 Projects\\eSafeFinal\\Esafe-Team-Project\\Esafe-Team-Project\\Esafe-Team-Project.csproj",
+      "projectUniqueName": "C:\\Users\\HANI\\OneDrive\\Desktop\\esafe final\\Esafe-Team-Project\\Esafe-Team-Project\\Esafe-Team-Project.csproj",
       "projectName": "Esafe-Team-Project",
-      "projectPath": "D:\\VS 2022 Projects\\eSafeFinal\\Esafe-Team-Project\\Esafe-Team-Project\\Esafe-Team-Project.csproj",
-      "packagesPath": "C:\\Users\\shahd\\.nuget\\packages\\",
-      "outputPath": "D:\\VS 2022 Projects\\eSafeFinal\\Esafe-Team-Project\\Esafe-Team-Project\\obj\\",
+      "projectPath": "C:\\Users\\HANI\\OneDrive\\Desktop\\esafe final\\Esafe-Team-Project\\Esafe-Team-Project\\Esafe-Team-Project.csproj",
+      "packagesPath": "C:\\Users\\HANI\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HANI\\OneDrive\\Desktop\\esafe final\\Esafe-Team-Project\\Esafe-Team-Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\shahd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\HANI\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8563,7 +8563,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8664,7 +8663,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
