@@ -14,6 +14,8 @@ namespace Esafe_Team_Project.Data
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Transfer> Transfers { get; set; }
+        public DbSet<CreditCard> CreditCards { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
