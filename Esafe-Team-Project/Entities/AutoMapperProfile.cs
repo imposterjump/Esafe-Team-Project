@@ -17,6 +17,7 @@ namespace Esafe_Team_Project.Entities
             CreateMap<AddressDto, Address>().ReverseMap();
             CreateMap<Client, AuthenticateResponse>().ReverseMap();
             CreateMap<Admin, AuthenticateResponse>().ReverseMap();
+            CreateMap<Transfer, TransferResponse>().ReverseMap();
         }
     }
 }
