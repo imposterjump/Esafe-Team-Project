@@ -312,5 +312,33 @@ namespace Esafe_Team_Project.Services
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<List<TransferResponse>> GetTransferInfo(Client client)
+        {
+            List<Transfer> transfers = await _dbContext.Transfers.Where(_ => _.Id == client.Id).ToListAsync();
+            if (transfers != null)
+            {
+                List<TransferResponse> transferdto = _mapper.Map<List<TransferResponse>>(transfers);
+                return transferdto;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<TransferResponse>> GetTransferInfoById(int id)
+        {
+            List<Transfer> transfers = await _dbContext.Transfers.Where(_ => _.RecieverId == id).ToListAsync();
+            if (transfers != null)
+            {
+                List<TransferResponse> transferdto = _mapper.Map<List<TransferResponse>>(transfers);
+                return transferdto;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }
