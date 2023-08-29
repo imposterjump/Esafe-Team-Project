@@ -1,0 +1,31 @@
+﻿# .NET Core build output
+bin/
+obj/
+
+# User-specific files and directories
+*.user
+*.suo
+*.cache
+
+# Visual Studio files
+.vs/
+.vscode/
+
+# NuGet packages
+*.nupkg
+packages/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+TestResults/
+
+# Other generated files
+_*
+*.dbmdl
+*.dbproj.schemaview
+*.pfx
+*.publishsettings
+node_modules/
+bower_components/
+appsettings.json
