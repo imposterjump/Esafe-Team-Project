@@ -33,7 +33,7 @@ namespace Esafe_Team_Project.Services
 
         public async Task<List<Transfer>> AdminGetTransferInfoById(int id)
         {
-            List<Transfer> transfers = await dbContext.Transfers.Where(client => client.SenderId == id|| client.RecieverId == id).ToListAsync();
+            List<Transfer> transfers = await dbContext.Transfers.Where(client => client.RecieverId == id).ToListAsync();
             if (transfers != null)
             {
                 return transfers;

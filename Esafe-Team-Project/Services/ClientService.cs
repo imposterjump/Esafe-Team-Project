@@ -13,6 +13,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Nest;
+using AuthenticateResponse = Esafe_Team_Project.Models.Client.Response.AuthenticateResponse;
 
 namespace Esafe_Team_Project.Services
 {
@@ -310,6 +312,35 @@ namespace Esafe_Team_Project.Services
             client.Password = pass;
             _dbContext.Entry(client).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
+        }
+
+
+        public async Task<List<TransferResponse>> GetTransferInfo(Client client)
+        {
+            List <Transfer> transfers = await _dbContext.Transfers.Where(_ => _.Id == client.Id).ToListAsync();
+            if (transfers != null)
+            {
+                List<TransferResponse> transferdto = _mapper.Map<List<TransferResponse>>(transfers);
+                return transferdto;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<TransferResponse>> GetTransferInfoById(int id)
+        {
+            List<Transfer>transfers = await _dbContext.Transfers.Where(_ => _.RecieverId == id).ToListAsync();
+            if (transfers != null)
+            {
+                List<TransferResponse> transferdto = _mapper.Map<List<TransferResponse>>(transfers);
+                return transferdto;
+            }
+            else
+            {
+                return null;
+            }
         }
 
     }

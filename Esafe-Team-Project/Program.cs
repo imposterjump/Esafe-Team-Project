@@ -46,8 +46,7 @@ builder.Services.AddSwaggerGen(x => {
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BankDB"))
-    );
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BankDatabaseCnn")));
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {

@@ -179,5 +179,40 @@ namespace Esafe_Team_Project.Controllers
 
             return Ok();
         }
+
+
+        [Authorize(Data.Enums.Role.Client)]
+        [HttpGet("GetTransfers")]
+        public async Task<ActionResult<List<TransferResponse>>> GetTransferInfo()
+        {
+            try
+            {
+                var client = Client;
+                List<TransferResponse> transferDto = await _service.GetTransferInfo(client);
+                return Ok(transferDto);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Authorize(Data.Enums.Role.Client)]
+        [HttpGet("GetTranferBy{id}")]
+        public async Task<ActionResult<List<TransferResponse>>> GetTransferInfoById(int id)
+        {
+            //Using Service:
+
+            var data = await _service.GetTransferInfoById(id);
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            _logger.LogInformation("Get transfers with id = {id} is successful", id);
+            return data;
+
+        }
     }
 }
