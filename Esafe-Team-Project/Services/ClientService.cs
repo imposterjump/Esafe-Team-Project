@@ -14,6 +14,8 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Esafe_Team_Project.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace Esafe_Team_Project.Services
 {
@@ -262,7 +264,7 @@ namespace Esafe_Team_Project.Services
         public async Task<List<ClientDisplayDto>> GetAll()
         {
             Console.WriteLine("enetered get all clients service");
-            var clients = await _dbContext.Clients.Include(_ => _.ClientAddresses).ToListAsync();
+            var clients = await _dbContext.Clients.Include(_ => _.ClientAddresses).Include(_ => _.ClientCertificates).ToListAsync();
             Console.WriteLine(clients.ToString());
             List<ClientDisplayDto> clientsDto = _mapper.Map<List<ClientDisplayDto>>(clients);
             Console.WriteLine(clientsDto.ToString());
@@ -271,7 +273,7 @@ namespace Esafe_Team_Project.Services
 
         public async Task<List<ClientDisplayDto>> GetClientbyID(int id)
         {
-            var client = await _dbContext.Clients.Where(client => client.Id == id).Include(_ => _.ClientAddresses).ToListAsync();
+            var client = await _dbContext.Clients.Where(client => client.Id == id).Include(_ => _.ClientAddresses).Include(_ => _.ClientCertificates).ToListAsync();
             Console.WriteLine(client.ToString());
             List<ClientDisplayDto> retClient = _mapper.Map<List<ClientDisplayDto>>(client);
             return retClient;
@@ -379,5 +381,37 @@ namespace Esafe_Team_Project.Services
 
         }
 
+        public async Task<ActionResult<Transfer>> tranfermoney(double amount, int sender_id, int receiver_id)
+        {
+            if(amount <= 0||sender_id == null||receiver_id==null) 
+            {
+                return null;
+            }
+            else
+            {
+                var sender = await _dbContext.Clients.FindAsync(sender_id);
+                var reciever = await _dbContext.Clients.FindAsync(receiver_id);
+                if(sender.balance<amount)
+                {
+                    return null;
+                }
+                else
+                {
+                    sender.balance -= amount;
+                    reciever.balance += amount;
+                    Transfer t1= new Transfer();
+                    t1.Amount = amount;
+                    t1.SenderId = sender_id;
+                    t1.RecieverId = receiver_id;
+                    t1.Date = DateTime.Now;
+                    _dbContext.Transfers.Add(t1);
+                    _dbContext.Entry(sender).State = EntityState.Modified;
+                    _dbContext.Entry(reciever).State = EntityState.Modified;
+                    await _dbContext.SaveChangesAsync();
+                    return t1;
+                }
+                
+            }
+        }
     }
 }

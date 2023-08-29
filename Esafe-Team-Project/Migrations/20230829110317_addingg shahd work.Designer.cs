@@ -4,6 +4,7 @@ using Esafe_Team_Project.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Esafe_Team_Project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230829110317_addingg shahd work")]
+    partial class addinggshahdwork
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,8 +131,6 @@ namespace Esafe_Team_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
-
                     b.ToTable("Certificates");
                 });
 
@@ -189,9 +190,6 @@ namespace Esafe_Team_Project.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<double>("balance")
-                        .HasColumnType("float");
-
                     b.HasKey("Id");
 
                     b.ToTable("Clients");
@@ -243,8 +241,6 @@ namespace Esafe_Team_Project.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
-
                     b.ToTable("CreditCards");
                 });
 
@@ -259,9 +255,6 @@ namespace Esafe_Team_Project.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<int?>("ClientId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -272,8 +265,6 @@ namespace Esafe_Team_Project.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
 
                     b.ToTable("Transfers");
                 });
@@ -289,42 +280,9 @@ namespace Esafe_Team_Project.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("Esafe_Team_Project.Entities.Certificate", b =>
-                {
-                    b.HasOne("Esafe_Team_Project.Entities.Client", "client")
-                        .WithMany("ClientCertificates")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("client");
-                });
-
-            modelBuilder.Entity("Esafe_Team_Project.Entities.CreditCard", b =>
-                {
-                    b.HasOne("Esafe_Team_Project.Entities.Client", null)
-                        .WithMany("ClientCreditCards")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Esafe_Team_Project.Entities.Transfer", b =>
-                {
-                    b.HasOne("Esafe_Team_Project.Entities.Client", null)
-                        .WithMany("ClientTransfers")
-                        .HasForeignKey("ClientId");
-                });
-
             modelBuilder.Entity("Esafe_Team_Project.Entities.Client", b =>
                 {
                     b.Navigation("ClientAddresses");
-
-                    b.Navigation("ClientCertificates");
-
-                    b.Navigation("ClientCreditCards");
-
-                    b.Navigation("ClientTransfers");
                 });
 #pragma warning restore 612, 618
         }

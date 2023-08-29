@@ -268,6 +268,23 @@ namespace Esafe_Team_Project.Controllers
 
             }
         }
+        [Authorize(Role.Client)]
+        [HttpPost("transfer money to ")]
+        public async Task<ActionResult<Transfer>> transfer_money(double amount , int receiver_id)
+        {
+            var client= Client;
+            var result = await _service.tranfermoney(amount, client.Id, receiver_id);
+            if(result != null)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest("error in the transaction ");
+            }
+        }
+        
+        
     }
 
 

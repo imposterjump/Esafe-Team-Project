@@ -24,6 +24,11 @@ namespace Esafe_Team_Project.Data
                 .HasOne(e => e.Client)
                 .WithMany(e => e.ClientAddresses)
                 .HasForeignKey(e => e.ClientID);
+
+            modelBuilder.Entity<Certificate>()
+               .HasOne(e => e.client)
+               .WithMany(e => e.ClientCertificates)
+               .HasForeignKey(e => e.ClientId);
         }
 
     }
