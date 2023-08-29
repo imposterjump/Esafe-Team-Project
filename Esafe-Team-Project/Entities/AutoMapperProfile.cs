@@ -5,6 +5,7 @@ using Esafe_Team_Project.Models.Client.Request;
 using Esafe_Team_Project.Models.Address;
 using Esafe_Team_Project.Models.Client.Response;
 using AuthenticateResponse = Esafe_Team_Project.Models.Client.Response.AuthenticateResponse;
+using Esafe_Team_Project.Models;
 
 namespace Esafe_Team_Project.Entities
 {
@@ -18,6 +19,8 @@ namespace Esafe_Team_Project.Entities
             CreateMap<Client, AuthenticateResponse>().ReverseMap();
             CreateMap<Admin, AuthenticateResponse>().ReverseMap();
             CreateMap<Transfer, TransferResponse>().ReverseMap();
+            CreateMap<CreditCard, CreditCardDto>().ReverseMap();
+            CreateMap<Certificate, CertificateDto>().ReverseMap();
         }
     }
 }
