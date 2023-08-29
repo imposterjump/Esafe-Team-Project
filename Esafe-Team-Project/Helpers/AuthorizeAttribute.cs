@@ -9,7 +9,7 @@ namespace Esafe_Team_Project.Helpers
     public class AuthorizeAttribute : Attribute, IAuthorizationFilter
     {
         public Role role { get; set; }
-
+        // added comment here 
         public AuthorizeAttribute(Role _role)
         {
             this.role = _role;
@@ -29,6 +29,7 @@ namespace Esafe_Team_Project.Helpers
 
                 // not logged in or role not authorized
                 //addComment
+                // adding a new comment here 
                 context.Result = new JsonResult(new { message = "Unauthorized, Access Denied" }) { StatusCode = StatusCodes.Status401Unauthorized };
 
             }
