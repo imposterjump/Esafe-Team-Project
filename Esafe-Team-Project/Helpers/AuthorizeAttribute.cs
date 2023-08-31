@@ -33,6 +33,7 @@ namespace Esafe_Team_Project.Helpers
                 context.Result = new JsonResult(new { message = "Unauthorized, Access Denied" }) { StatusCode = StatusCodes.Status401Unauthorized };
 
             }
+            
         }
     }
 }
