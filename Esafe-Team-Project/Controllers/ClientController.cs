@@ -283,8 +283,20 @@ namespace Esafe_Team_Project.Controllers
                 return BadRequest("error in the transaction ");
             }
         }
+
+        [Authorize(Role.Client)]
+        [HttpPost("apply_for_a_certificate")]
+        public async Task<ActionResult<(string,Certificate)>> certificate_app(CertificateReqDto c1)
         
-        
+        {
+            Console.WriteLine(" i am in the controller");
+            var client = Client;
+            var c2 = _mapper.Map<Certificate>(c1);
+            var result = await _service.add_certificate(client.Id, c2);
+            return Ok(result);
+        }
+
+
     }
 
 

@@ -26,6 +26,7 @@ namespace Esafe_Team_Project.Middleware
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             if (token != null)
                 await attachAccountToContext(context, appDbContext, token);
+            
 
             await _next(context);
         }

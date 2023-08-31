@@ -14,9 +14,13 @@ namespace Esafe_Team_Project.Entities
         public Client?  client{ get; set; }
         public CertificateType CertificateType { get; set; }
         public int InterestPercentage { get; set; }
-        public bool Accepted { get; set; } = false;
+        public bool Accepted { get; set; } 
         public DateTime ApplicationDate { get; set; }
         public DateTime? AcceptanceDate { get; set; }
         public int? ApprovedById { get; set; }
+        public Certificate()
+        {
+            Accepted = false;
+        }
     }
 }

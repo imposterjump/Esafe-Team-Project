@@ -20,7 +20,8 @@ namespace Esafe_Team_Project.Entities
             CreateMap<Admin, AuthenticateResponse>().ReverseMap();
             CreateMap<Transfer, TransferResponse>().ReverseMap();
             CreateMap<CreditCard, CreditCardDto>().ReverseMap();
-            CreateMap<Certificate, CertificateDto>().ReverseMap();
+            CreateMap<Certificate, CertificateDto>().ReverseMap(); 
+            CreateMap<Certificate, CertificateReqDto>().ReverseMap();
         }
     }
 }

@@ -2,13 +2,12 @@
 
 namespace Esafe_Team_Project.Models
 {
-    public class CertificateDto
+    public class CertificateReqDto
     {
-        public int ClientId { get; set; }
+
         public CertificateType CertificateType { get; set; }
         public int InterestPercentage { get; set; }
         public bool AutoRenewal { get; set; }
-        public bool Accepted { get; set; }
 
     }
 }

@@ -11,6 +11,8 @@ namespace Esafe_Team_Project.Models.Client.Response
         public string Email { get; set; }
         public string AccountNo { get; set; }
         public List<AddressDto>? ClientAddresses { get; set; } = new List<AddressDto>();
-        
+        public List<Certificate>? ClientCertificates { get; set; } = new List<Certificate>();
+        public List<CreditCard>? ClientCreditCards { get; set; } = new List<CreditCard>();
+
     }
 }

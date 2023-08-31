@@ -16,6 +16,7 @@ using System.Text;
 using Esafe_Team_Project.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Diagnostics;
+using System.Reflection;
 
 namespace Esafe_Team_Project.Services
 {
@@ -412,6 +413,24 @@ namespace Esafe_Team_Project.Services
                 }
                 
             }
+        }
+
+        public async Task<ActionResult<(Certificate, string)>> add_certificate(int employee_id,Certificate c1)
+        {
+            var client = await _dbContext.Clients.FindAsync(employee_id);
+            if(client == null||c1==null)
+            {
+                return (null, "sorry this user id is invalid ");
+            }
+            else
+            {
+                c1.Accepted = false;
+                client.ClientCertificates.Add(c1);
+                _dbContext.Entry(client).State = EntityState.Modified;
+                await _dbContext.Certificates.AddAsync(c1);
+                await _dbContext.SaveChangesAsync();
+                return (c1, " certificate application accepted and waiting for the response");
+            }  
         }
     }
 }
