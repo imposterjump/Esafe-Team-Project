@@ -269,7 +269,7 @@ namespace Esafe_Team_Project.Controllers
             }
         }
         [Authorize(Role.Client)]
-        [HttpPost("transfer money to ")]
+        [HttpPost("transfer_money")]
         public async Task<ActionResult<Transfer>> transfer_money(double amount , int receiver_id)
         {
             var client= Client;

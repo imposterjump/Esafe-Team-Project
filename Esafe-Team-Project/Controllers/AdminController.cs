@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using static Esafe_Team_Project.Helpers.AuthorizeAttribute;
 using Esafe_Team_Project.Services;
 using Esafe_Team_Project.Helpers;
+using Esafe_Team_Project.Models;
 
 namespace Esafe_Team_Project.Controllers
 {
@@ -75,6 +76,17 @@ namespace Esafe_Team_Project.Controllers
                     return StatusCode(500, ex.Message);
                 }
             }
+        [Authorize(Role.Admin)]
+        [HttpPost("approve_certificate")]
+        public async Task<ActionResult<(string, Certificate)>> ApproveCertificate(int CertificateId)
+        {
+            var admin = Admin;
+            var result = await _service.approveCertificate(CertificateId, admin.Id);
+            return Ok(result);
+
+
         }
+
+    }
     
 }

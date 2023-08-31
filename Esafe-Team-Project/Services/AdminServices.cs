@@ -2,6 +2,7 @@
 using Esafe_Team_Project.Data;
 using Esafe_Team_Project.Entities;
 using Esafe_Team_Project.Helpers;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -42,6 +43,25 @@ namespace Esafe_Team_Project.Services
             {
                 return null;
             }
+        }
+        public async Task<ActionResult<(string, Certificate)>> approveCertificate(int CertificateId,int  admin_id)
+        {
+            var c1 = await dbContext.Certificates.FindAsync(CertificateId);
+            if(c1 == null|| admin_id ==null)
+            {
+                return ("admin id or certificate id id invalid", null);
+            }
+            else
+            {
+                c1.Accepted = true;
+                c1.AcceptanceDate = DateTime.Now;
+                c1.ApprovedById = admin_id;
+                dbContext.Entry(c1).State = EntityState.Modified;
+                await dbContext.SaveChangesAsync();
+                return ("certificate approved ", c1);
+
+            }
+
         }
     }
 }

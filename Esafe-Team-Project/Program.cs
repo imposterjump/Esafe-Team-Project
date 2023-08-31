@@ -58,6 +58,8 @@ builder.Services.Configure<Jwt>(
         builder.Configuration.GetSection("Jwt"));
 
 builder.Services.AddScoped<ClientService>();
+builder.Services.AddScoped<AdminServices>();
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
