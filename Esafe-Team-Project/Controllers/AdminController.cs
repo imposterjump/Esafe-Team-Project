@@ -86,6 +86,17 @@ namespace Esafe_Team_Project.Controllers
 
 
         }
+        
+        [Authorize(Role.Admin)]
+        [HttpGet("get_all_certificates_requests")]
+        public async Task<ActionResult<(string, Certificate)>> get_All_Cert_Req()
+        {
+            
+            var result = await _service.Get_All_Cert_Req();
+            return Ok(result);
+
+
+        }
 
     }
     

@@ -2,6 +2,7 @@
 using Esafe_Team_Project.Data;
 using Esafe_Team_Project.Entities;
 using Esafe_Team_Project.Helpers;
+using Esafe_Team_Project.Models.Client.Response;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -63,5 +64,22 @@ namespace Esafe_Team_Project.Services
             }
 
         }
+        public async Task<(List<Certificate>,string)> Get_All_Cert_Req()
+        {
+
+            var certificates = await dbContext.Certificates.Where(client=> client.Accepted==false).ToListAsync();
+            if(certificates.Count > 0)
+            {
+                return (certificates,"success");
+            }
+            else
+            {
+                return (null, "there is no request till now you can rest admin");
+            }
+           
+            
+            
+        }
+
     }
 }
