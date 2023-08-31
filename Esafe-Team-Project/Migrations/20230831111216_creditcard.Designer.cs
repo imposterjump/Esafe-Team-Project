@@ -4,6 +4,7 @@ using Esafe_Team_Project.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Esafe_Team_Project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230831111216_creditcard")]
+    partial class creditcard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,7 +211,7 @@ namespace Esafe_Team_Project.Migrations
                     b.Property<DateTime?>("AcceptanceDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Accepted")
+                    b.Property<bool>("Accepted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ApplicationDate")
@@ -217,27 +220,28 @@ namespace Esafe_Team_Project.Migrations
                     b.Property<int?>("ApprovedById")
                         .HasColumnType("int");
 
-                    b.Property<double?>("BalanceAvailable")
+                    b.Property<double>("BalanceAvailable")
                         .HasColumnType("float");
 
                     b.Property<string>("CVV")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("CardLimit")
+                    b.Property<double>("CardLimit")
                         .HasColumnType("float");
 
                     b.Property<string>("CardNumber")
+                        .IsRequired()
                         .HasMaxLength(16)
                         .HasColumnType("nvarchar(16)");
 
-                    b.Property<string>("CardType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CardType")
+                        .HasColumnType("int");
 
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("ExpiryDate")
+                    b.Property<DateTime>("ExpiryDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

@@ -29,6 +29,13 @@ namespace Esafe_Team_Project.Data
                .HasOne(e => e.client)
                .WithMany(e => e.ClientCertificates)
                .HasForeignKey(e => e.ClientId);
+
+
+            modelBuilder.Entity<CreditCard>()
+               .HasOne(e => e.client)
+               .WithMany(e => e.ClientCreditCards)
+               .HasForeignKey(e => e.ClientId);
+
         }
 
     }

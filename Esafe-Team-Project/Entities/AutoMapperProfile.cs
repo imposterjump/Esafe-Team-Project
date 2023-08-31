@@ -22,6 +22,7 @@ namespace Esafe_Team_Project.Entities
             CreateMap<CreditCard, CreditCardDto>().ReverseMap();
             CreateMap<Certificate, CertificateDto>().ReverseMap(); 
             CreateMap<Certificate, CertificateReqDto>().ReverseMap();
+            CreateMap<CreditCard, CreditCardReqDto>().ReverseMap();
         }
     }
 }
