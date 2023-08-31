@@ -66,8 +66,8 @@ namespace Esafe_Team_Project.Controllers
             {
                 try
                 {
-                    var client = Client;
-                    var transferDto = await _service.AdminGetTransferInfoById(client.Id);
+                    
+                    var transferDto = await _service.AdminGetTransferInfoById(id);
                     return Ok(transferDto);
 
                 }
