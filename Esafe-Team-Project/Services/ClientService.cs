@@ -432,5 +432,22 @@ namespace Esafe_Team_Project.Services
                 return (c1, " certificate application accepted and waiting for the response");
             }  
         }
+        public async Task<ActionResult<(CreditCard, string)>> addCreditCard(int ClientId, CreditCard creditCard)
+        {
+            var client = await _dbContext.Clients.FindAsync(ClientId);
+            if (client == null || creditCard == null)
+            {
+                return (null, "sorry this user id is invalid ");
+            }
+            else
+            {
+                creditCard.Accepted = false;
+                client.ClientCreditCards.Add(creditCard);
+                _dbContext.Entry(client).State = EntityState.Modified;
+                await _dbContext.CreditCards.AddAsync(creditCard);
+                await _dbContext.SaveChangesAsync();
+                return (creditCard, "Credit Card application is pending and waiting for the response");
+            }
+        }
     }
 }

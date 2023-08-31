@@ -295,6 +295,15 @@ namespace Esafe_Team_Project.Controllers
             var result = await _service.add_certificate(client.Id, c2);
             return Ok(result);
         }
+        [HttpPost("CreditCardApplication (Silver,Gold,Platinum)")]
+        public async Task<ActionResult> CreditCardApp(CreditCardReqDto creditCardReq)
+
+        {
+            var client = Client;
+            var creditCard = _mapper.Map<CreditCard>(creditCardReq);
+            var result = await _service.addCreditCard(client.Id, creditCard);
+            return Ok("your application is pending");
+        }
 
 
     }
