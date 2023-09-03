@@ -215,7 +215,6 @@ C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esaf
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\android-arm\native\librealm-wrappers.so
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\android-arm64\native\librealm-wrappers.so
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\android-x64\native\librealm-wrappers.so
@@ -238,13 +237,9 @@ C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esaf
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win-arm64\native\realm-wrappers.dll
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win-x64\native\realm-wrappers.dll
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win-x86\native\realm-wrappers.dll
-C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
-C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
-C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\obj\Debug\net6.0\Esafe-Team-Project.csproj.AssemblyReference.cache
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\obj\Debug\net6.0\Esafe-Team-Project.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\obj\Debug\net6.0\Esafe-Team-Project.AssemblyInfoInputs.cache
@@ -270,3 +265,12 @@ C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esaf
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\obj\Debug\net6.0\ref\Esafe-Team-Project.dll
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\Select.Html.dep
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\Select.HtmlToPdf.dll
+C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\Quartz.dll
+C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\Quartz.AspNetCore.dll
+C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\Quartz.Extensions.DependencyInjection.dll
+C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\Quartz.Extensions.Hosting.dll
+C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll

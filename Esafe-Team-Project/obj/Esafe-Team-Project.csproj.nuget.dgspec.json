@@ -95,6 +95,10 @@
               "target": "Package",
               "version": "[3.7.0, )"
             },
+            "Quartz.AspNetCore": {
+              "target": "Package",
+              "version": "[3.7.0, )"
+            },
             "Realm": {
               "target": "Package",
               "version": "[11.4.0, )"

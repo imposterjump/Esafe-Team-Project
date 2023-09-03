@@ -490,8 +490,8 @@ namespace Esafe_Team_Project.Services
                 var sender= await _dbContext.Clients.FindAsync(transaction.SenderId);
                 var receiver = await _dbContext.Clients.FindAsync(transaction.RecieverId);
                 var data = new Dictionary<string, string>();
-                data.Add("SenderName", sender.FirstName+sender.LastName);
-                data.Add("ReceiverName", receiver.FirstName + receiver.LastName);
+                data.Add("SenderName", sender.FirstName+" "+sender.LastName);
+                data.Add("ReceiverName", receiver.FirstName + " " + receiver.LastName);
                 data.Add("Amount", transaction.Amount.ToString());
                 data.Add("TransactionID", transaction_id.ToString());
                 data.Add("Date", transaction.Date.ToString());
@@ -518,6 +518,83 @@ namespace Esafe_Team_Project.Services
                 return null;
             }
             
+        }
+        public async Task<byte[]> GetcreditCard(int creditcard_id)
+        {
+            var creditcard = await _dbContext.CreditCards.FindAsync(creditcard_id);
+            if (creditcard != null)
+            {
+                // getting transaction infos and making the dictionary to  file the html placeholders
+                
+                var client = await _dbContext.Clients.FindAsync(creditcard.ClientId);
+                var data = new Dictionary<string, string>();
+                data.Add("Name", client.FirstName + " " + client.LastName);
+                data.Add("Balance", client.balance.ToString());
+                data.Add("CreditCardNumber",creditcard.CardNumber);
+                data.Add("expirydate", creditcard.ExpiryDate.ToString());
+                data.Add("CreditCardType", creditcard.CardType);
+                data.Add("CVV", creditcard.CVV);
+
+                Console.WriteLine("HTMLToPDF function from QRCodeService is called to generate a ticket from the template " + "Transactionpage");
+                HtmlToPdf converter = new HtmlToPdf();
+                converter.Options.PdfPageSize = PdfPageSize.Custom;
+                converter.Options.PdfPageCustomSize = new SizeF(400f, 400f);
+                string htmlString = await CreateAsync("CreditCardPage.html", data);
+                Console.WriteLine(htmlString);
+                string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                string baseUrl = directoryName + Path.DirectorySeparatorChar + "Templates" + Path.DirectorySeparatorChar + "imgs";
+                PdfDocument pdfDocument = converter.ConvertHtmlString(htmlString, baseUrl);
+                MemoryStream memoryStream = new MemoryStream();
+                byte[] result = pdfDocument.Save();
+                pdfDocument.Close();
+                memoryStream.Position = 0L;
+
+                return result;
+
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+        public async Task<byte[]> GetCertificatePdf(int certificate_id)
+        {
+            var certificate = await _dbContext.Certificates.FindAsync(certificate_id);
+            if (certificate != null)
+            {
+                // getting transaction infos and making the dictionary to  file the html placeholders
+
+                var client = await _dbContext.Clients.FindAsync(certificate.ClientId);
+                var data = new Dictionary<string, string>();
+                data.Add("Name", client.FirstName + " " + client.LastName);
+                data.Add("Balance", client.balance.ToString());
+                data.Add("CertificateType", certificate.CertificateType.ToString());
+                data.Add("CertificateId", certificate.Id.ToString());
+                data.Add("CertificateIntrest", certificate.InterestPercentage.ToString()+" % ");
+
+                Console.WriteLine("HTMLToPDF function from QRCodeService is called to generate a ticket from the template " + "Transactionpage");
+                HtmlToPdf converter = new HtmlToPdf();
+                converter.Options.PdfPageSize = PdfPageSize.Custom;
+                converter.Options.PdfPageCustomSize = new SizeF(400f, 400f);
+                string htmlString = await CreateAsync("CertificatePage.html", data);
+                Console.WriteLine(htmlString);
+                string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                string baseUrl = directoryName + Path.DirectorySeparatorChar + "Templates" + Path.DirectorySeparatorChar + "imgs";
+                PdfDocument pdfDocument = converter.ConvertHtmlString(htmlString, baseUrl);
+                MemoryStream memoryStream = new MemoryStream();
+                byte[] result = pdfDocument.Save();
+                pdfDocument.Close();
+                memoryStream.Position = 0L;
+
+                return result;
+
+            }
+            else
+            {
+                return null;
+            }
+
         }
     }
 }

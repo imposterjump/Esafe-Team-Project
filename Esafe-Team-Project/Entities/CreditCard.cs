@@ -17,7 +17,7 @@ namespace Esafe_Team_Project.Entities
         [MaxLength(16, ErrorMessage = "Credit Card number cannot exceed 13 digits")]
         [MinLength(13, ErrorMessage = "Credit Card must be atleast 13 digits")]
 
-        public string CardNumber { get; set; }
+        public string? CardNumber { get; set; }
 
         public string? CVV { get; set; }
         public DateTime? ExpiryDate { get; set; }

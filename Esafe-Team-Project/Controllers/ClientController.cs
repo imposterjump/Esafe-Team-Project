@@ -323,6 +323,44 @@ namespace Esafe_Team_Project.Controllers
                 return BadRequest("Ticket Not Found");
             }
         }
+        [Authorize(Role.Client)]
+        [HttpGet("CreditCard_to_pdf")]
+        public async Task<IActionResult> CreditCardSearch(int creditcardid)
+        {
+
+
+            var pdfcreditCard = await _service.GetcreditCard(creditcardid);
+            if (pdfcreditCard != null)
+            {
+
+                return File(pdfcreditCard, "application/pdf", "CreditCard" + ".pdf");
+
+
+            }
+            else
+            {
+                return BadRequest("Ticket Not Found");
+            }
+        }
+        [Authorize(Role.Client)]
+        [HttpGet("Certificate_to_pdf")]
+        public async Task<IActionResult> CertificateSearch(int creditcardid)
+        {
+
+
+            var pdfcreditCard = await _service.GetCertificatePdf(creditcardid);
+            if (pdfcreditCard != null)
+            {
+
+                return File(pdfcreditCard, "application/pdf", "Certificate" + ".pdf");
+
+
+            }
+            else
+            {
+                return BadRequest("Ticket Not Found");
+            }
+        }
 
 
     }

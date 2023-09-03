@@ -106,6 +106,7 @@ namespace Esafe_Team_Project.Controllers
             return Ok(result);
         }
 
+
     }
     
 }

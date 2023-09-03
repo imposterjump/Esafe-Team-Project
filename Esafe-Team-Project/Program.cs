@@ -10,6 +10,9 @@ using Serilog;
 using System.Text;
 using Microsoft.AspNetCore.Builder.Extensions;
 using Microsoft.Extensions.FileProviders;
+using Quartz;
+using Quartz.AspNetCore;
+using Esafe_Team_Project.Jobs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +58,28 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 });
 
+builder.Services.AddQuartz(q =>
+{
+    q.UseMicrosoftDependencyInjectionJobFactory();
+
+
+
+    q.ScheduleJob<ClientUpdateBalanceJob>(trigger => trigger
+           .WithIdentity("updating balance", "update Cron Job Group")
+           .StartNow()
+           //.WithSimpleSchedule(x => x.WithIntervalInMinutes(2).RepeatForever())
+           .WithSimpleSchedule(x => x.WithIntervalInSeconds(10).RepeatForever())
+           .WithDescription("updating balance every 10 sec ")
+       );
+});
+
+builder.Services.AddQuartzServer(options =>
+{
+    // when shutting down we want jobs to complete gracefully
+    options.WaitForJobsToComplete = true;
+});
+
+
 
 builder.Services.Configure<Jwt>(
         builder.Configuration.GetSection("Jwt"));
@@ -96,6 +121,7 @@ app.UseStaticFiles(new StaticFileOptions
     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Public")),
     RequestPath = "/Public"
 });
+
 
 app.UseMiddleware<Middleware>();
 app.UseMiddleware<JwtMiddleware>();
