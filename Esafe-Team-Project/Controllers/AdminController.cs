@@ -97,6 +97,14 @@ namespace Esafe_Team_Project.Controllers
 
 
         }
+        [Authorize(Role.Admin)]
+        [HttpPost("ApproveCreditCard")]
+        public async Task<ActionResult<(string, Certificate)>> ApproveCreditCard(int CreditCardId)
+        {
+            var admin = Admin;
+            var result = await _service.approveCreditCard(CreditCardId, admin.Id);
+            return Ok(result);
+        }
 
     }
     

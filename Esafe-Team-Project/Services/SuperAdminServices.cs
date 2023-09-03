@@ -12,6 +12,7 @@ namespace Esafe_Team_Project.Services
     {
         private readonly AppDbContext _dbContext;
         private readonly ClientService _clientservice;
+        private readonly IMapper _mapper;
         public SuperAdminServices(AppDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;

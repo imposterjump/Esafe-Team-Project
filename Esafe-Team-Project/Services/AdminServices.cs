@@ -6,6 +6,7 @@ using Esafe_Team_Project.Models.Client.Response;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Text;
 
 namespace Esafe_Team_Project.Services
 {
@@ -79,6 +80,107 @@ namespace Esafe_Team_Project.Services
            
             
             
+        }
+        public string Generate4Digits()
+        {
+
+            Random random = new Random();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 4; i++)
+            {
+                int digit = random.Next(0, 10);
+                sb.Append(digit);
+            }
+            return sb.ToString();
+        }
+
+        public string Generate16Digits()
+        {
+
+            Random random = new Random();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 16; i++)
+            {
+                int digit = random.Next(0, 10);
+                sb.Append(digit);
+            }
+            return sb.ToString();
+        }
+
+
+        public bool compareCVV(string CVV)
+        {
+            var CVVs = dbContext.CreditCards.Select(_ => _.CVV).ToList();
+            foreach (var cvv in CVVs)
+            {
+                if (cvv == CVV)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool compareCardNumber(string CardNumber)
+        {
+            var CardNos = dbContext.CreditCards.Select(_ => _.CardNumber).ToList();
+            foreach (var cardno in CardNos)
+            {
+                if (cardno == CardNumber)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+
+
+        public async Task<ActionResult<(string, CreditCard)>> approveCreditCard(int CreditCardId, int admin_id)
+        {
+            var card = await dbContext.CreditCards.FindAsync(CreditCardId);
+            if (card == null || admin_id == null)
+            {
+                return ("admin id or certificate id id invalid", null);
+            }
+            else
+            {
+                string CVV;
+                string CardNumber;
+                DateTime now = DateTime.Now;
+                do
+                {
+                    CVV = Generate4Digits();
+                }
+                while (compareCVV(CVV));
+
+                do
+                {
+                    CardNumber = Generate16Digits();
+                }
+                while (compareCardNumber(CardNumber));
+
+                var client = await dbContext.Clients.FindAsync(card.ClientId);
+                card.Accepted = true;
+                card.AcceptanceDate = DateTime.Now;
+                card.ApprovedById = admin_id;
+                card.CardNumber = CardNumber;
+                card.CVV = CVV;
+                card.ExpiryDate = now.AddYears(1);
+                card.BalanceAvailable = client.balance;
+                if (card.CardType == "Silver")
+                    card.CardLimit = 10000;
+                else if (card.CardType == "Gold")
+                    card.CardLimit = 20000;
+                else
+                    card.CardLimit = 30000;
+                dbContext.Entry(card).State = EntityState.Modified;
+                await dbContext.SaveChangesAsync();
+                return ("creditCard approved ", card);
+
+
+            }
         }
 
     }

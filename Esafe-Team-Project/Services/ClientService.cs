@@ -75,6 +75,8 @@ namespace Esafe_Team_Project.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
+
         private string generateJwtTokenAdmin(Admin user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -161,6 +163,7 @@ namespace Esafe_Team_Project.Services
                         }
                         newClient.Password = HashPassword(client.Password);
                         newClient.AccountNo = GetAccountNo();
+                        newClient.balance = GenerateBalance();
 
                         try
                         {
@@ -448,6 +451,12 @@ namespace Esafe_Team_Project.Services
                 await _dbContext.SaveChangesAsync();
                 return (creditCard, "Credit Card application is pending and waiting for the response");
             }
+        }
+        public double GenerateBalance()
+        {
+            Random random = new Random();
+            double balance = random.Next(100, 10000000);
+            return balance;
         }
     }
 }
