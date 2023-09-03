@@ -25,5 +25,11 @@ namespace Esafe_Team_Project.Entities
         public string Password { get; set; }
 
         public Role Role { get; set; }
+        public bool Verified { get; set; } = false;
+        public DateTime VerifiedAt = DateTime.MinValue;
+        public short OTP { get; set; } = 1111;
+        public DateTime OTPExpiry { get; set; } = DateTime.MinValue;
+        public short RemainingAttempts { get; set; }
+
     }
 }

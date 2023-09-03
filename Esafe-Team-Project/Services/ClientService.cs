@@ -27,11 +27,13 @@ namespace Esafe_Team_Project.Services
         private readonly Jwt _jwt;
         private readonly AppDbContext _dbContext;
         private readonly IMapper _mapper;
-        public ClientService(AppDbContext dbContext, IMapper mapper, IOptions<Jwt> optionsJwt)
+        private readonly IEmailClient _mailer;
+        public ClientService(AppDbContext dbContext, IMapper mapper, IOptions<Jwt> optionsJwt, IEmailClient mailer)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _jwt = optionsJwt.Value;
+            _mailer = mailer;
         }
 
         public string HashPassword(string password)
@@ -166,11 +168,15 @@ namespace Esafe_Team_Project.Services
                         newClient.Password = HashPassword(client.Password);
                         newClient.AccountNo = GetAccountNo();
                         newClient.balance = GenerateBalance();
-
+                        newClient.OTPExpiry = DateTime.Now.AddMinutes(5);
+                        newClient.RemainingAttempts = 5;
+                        newClient.OTP = (short)new Random().Next(1000, 9999);
+                        newClient.Verified = false;
                         try
                         {
                             _dbContext.Clients.Add(newClient);
                             _dbContext.SaveChanges();
+                            await _mailer.SendAsync(newClient.Email, "Bank | Verification Code.", " Here is your verification code " + newClient.OTP.ToString());
                             Console.WriteLine("client added successfully");
                         }
                         catch (Exception ex)
@@ -211,6 +217,9 @@ namespace Esafe_Team_Project.Services
             if (_dbContext.Clients.Any(x => x.Username == client.Username))
             {
                 var logClient = _dbContext.Clients.FirstOrDefault(entity => entity.Username == client.Username);
+                if(logClient?.Verified == false) {
+                    throw new Exception("Unverified.");
+                }
                 if (VerifyPassword(client.Password, logClient.Password))
                 {
                     // authentication successful so generate jwt and refresh tokens

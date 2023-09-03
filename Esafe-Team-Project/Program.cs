@@ -13,6 +13,7 @@ using Microsoft.Extensions.FileProviders;
 using Quartz;
 using Quartz.AspNetCore;
 using Esafe_Team_Project.Jobs;
+using Esafe_Team_Project.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -83,9 +84,13 @@ builder.Services.AddQuartzServer(options =>
 
 builder.Services.Configure<Jwt>(
         builder.Configuration.GetSection("Jwt"));
+builder.Services.Configure<MailerConfiguration>(
+        builder.Configuration.GetSection("MailerConfiguration"));
 
 builder.Services.AddScoped<ClientService>();
 builder.Services.AddScoped<AdminServices>();
+builder.Services.AddScoped<ISuperAdminServices, SuperAdminServices>();
+builder.Services.AddScoped<IEmailClient, EmailClient>();
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

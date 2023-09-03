@@ -24,9 +24,10 @@ namespace Esafe_Team_Project.Helpers
     
 
 
-            if (user == null || user.Role != this.role)
+            if (user == null || user.Role != this.role )
             {
-
+                if( user?.Verified == false)
+                    context.Result = new JsonResult(new { message = "Unverified, Access Denied" }) { StatusCode = StatusCodes.Status401Unauthorized };
                 // not logged in or role not authorized
                 //addComment
                 // adding a new comment here 
@@ -34,6 +35,6 @@ namespace Esafe_Team_Project.Helpers
 
             }
             
-        }
+         }
     }
 }

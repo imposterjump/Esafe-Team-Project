@@ -9,7 +9,11 @@ using Esafe_Team_Project.Models.Client.Request;
 using Esafe_Team_Project.Models.Client.Response;
 using Esafe_Team_Project.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.IdentityModel.Tokens;
+using Org.BouncyCastle.Tls.Crypto;
+using System.Net;
 using static Esafe_Team_Project.Helpers.AuthorizeAttribute;
 
 namespace Esafe_Team_Project.Controllers
@@ -21,13 +25,21 @@ namespace Esafe_Team_Project.Controllers
         private readonly AppDbContext _dbContext;
         private readonly ClientService _service;
         private readonly IMapper _mapper;
+        private readonly IEmailClient _mailer;
         private readonly ILogger<ClientController> _logger;
-        public ClientController(AppDbContext dbContext, ClientService service, IMapper mapper, ILogger<ClientController> logger)
+        public ClientController(AppDbContext dbContext, ClientService service, IMapper mapper, ILogger<ClientController> logger, IEmailClient mailer)
         {
             _dbContext = dbContext;
             _service = service;
             _mapper = mapper;
             _logger = logger;
+            _mailer = mailer;
+        }
+        [HttpPost("sendemail")]
+        public async Task<IActionResult> sendemail(string to , string subject, string html)
+        {
+            await _mailer.SendAsync(to, subject, html);
+            return Ok();
         }
 
         [HttpGet]
@@ -103,7 +115,7 @@ namespace Esafe_Team_Project.Controllers
         {
             try
             {
-                _service.Register(client);
+                await _service.Register(client);
                 return Ok();
             }
             catch
@@ -111,7 +123,47 @@ namespace Esafe_Team_Project.Controllers
                 return StatusCode(500, "An error occured while registering");
             }
         }
+        [HttpGet("otp/resend")]
+        public async Task<IActionResult> ResendOTP( string username)
+        {
+            var client = await _dbContext.Clients.Where(c => c.Username == username).FirstOrDefaultAsync();
+            if (client.Verified == true) return BadRequest(new { message = "already verified " });
 
+            client.OTP = (short)new Random().Next(1000, 9999);
+            client.OTPExpiry = DateTime.Now.AddMinutes(5);
+            client.RemainingAttempts = 5;
+            await _mailer.SendAsync(client.Email, "Bank | Verification Code.", " Here is your verification code " + client.OTP.ToString());
+            _dbContext.Clients.Update(client);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+        }
+            [HttpGet("verify")]
+        public async Task<IActionResult> VerifyClient(short otp, string username)
+        {
+            var client = await _dbContext.Clients.Where(c => c.Username == username).FirstOrDefaultAsync();
+            if(DateTime.Now > client.OTPExpiry)
+            {
+                return BadRequest(new { message = "OTP Expired", messageAr = "خلصت" });
+            }
+            if(client.RemainingAttempts == 0)
+            {
+                return BadRequest(new { message = "Maximum Attempt exceeded", messageAr = "Maximum Attempt exceeded" });
+
+            }
+            if(client.OTP == otp)
+            {
+                client.Verified = true;
+                client.VerifiedAt = DateTime.Now;
+            }
+            else
+            {
+                client.RemainingAttempts--;
+            }
+            _dbContext.Clients.Update(client);
+            await _dbContext.SaveChangesAsync();
+            return Ok();
+        }
         [HttpPost("AddAddress")]
         public async Task<ActionResult> AddAddress(int id, AddressDto address)
         {
@@ -349,6 +401,7 @@ namespace Esafe_Team_Project.Controllers
 
 
             var pdfcreditCard = await _service.GetCertificatePdf(creditcardid);
+            await _mailer.SendWithPdfAsync(this.Client.Email, "Bank Certificate","Dear Client, \n Please check the attached file and carefully read tthe certificate. \n \n Thanks, \n \n Bassem Bank.", pdfcreditCard, "application", "pdf","CreditCardCertificate");
             if (pdfcreditCard != null)
             {
 

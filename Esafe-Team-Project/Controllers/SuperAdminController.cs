@@ -15,7 +15,7 @@ namespace Esafe_Team_Project.Controllers
     public class SuperAdminController : BaseController
     {
         private readonly AppDbContext _dbContext;
-        private readonly SuperAdminServices _service;
+        private readonly ISuperAdminServices _service;
         private readonly IMapper _mapper;
         public SuperAdminController(AppDbContext dbContext, SuperAdminServices service, IMapper mapper)
         {

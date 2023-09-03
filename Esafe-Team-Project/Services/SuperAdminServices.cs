@@ -8,7 +8,12 @@ using Microsoft.Extensions.Options;
 
 namespace Esafe_Team_Project.Services
 {
-    public class SuperAdminServices
+    public interface ISuperAdminServices
+    {
+        public Task AddAdmin(Admin admin);
+        public Task BlockAdmin(int id);
+    }
+    public class SuperAdminServices : ISuperAdminServices
     {
         private readonly AppDbContext _dbContext;
         private readonly ClientService _clientservice;
