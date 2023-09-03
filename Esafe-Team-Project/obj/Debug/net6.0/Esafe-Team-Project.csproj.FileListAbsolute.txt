@@ -268,3 +268,5 @@ C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esaf
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\obj\Debug\net6.0\Esafe-Team-Project.pdb
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\obj\Debug\net6.0\Esafe-Team-Project.genruntimeconfig.cache
 C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\obj\Debug\net6.0\ref\Esafe-Team-Project.dll
+C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\Select.Html.dep
+C:\Users\impos\OneDrive\Desktop\ESafe-Proj-Final-Wallahy\Esafe-Team-Project\Esafe-Team-Project\bin\Debug\net6.0\Select.HtmlToPdf.dll

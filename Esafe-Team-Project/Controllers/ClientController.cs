@@ -304,6 +304,25 @@ namespace Esafe_Team_Project.Controllers
             var result = await _service.addCreditCard(client.Id, creditCard);
             return Ok("your application is pending");
         }
+        [Authorize(Role.Client)]
+        [HttpGet("transaction_to_pdf")]
+        public async Task<IActionResult> transferSearch(int transactionid)
+        {
+            
+            
+            var pdftransaction= await _service.GetTransactionPDF(transactionid);
+            if (pdftransaction!= null)
+            {
+                
+                    return File(pdftransaction, "application/pdf", "transaction" + ".pdf");
+                
+
+            }
+            else
+            {
+                return BadRequest("Ticket Not Found");
+            }
+        }
 
 
     }

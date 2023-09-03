@@ -91,9 +91,17 @@
               "target": "Package",
               "version": "[7.17.5, )"
             },
+            "Quartz": {
+              "target": "Package",
+              "version": "[3.7.0, )"
+            },
             "Realm": {
               "target": "Package",
               "version": "[11.4.0, )"
+            },
+            "Select.HtmlToPdf.NetCore": {
+              "target": "Package",
+              "version": "[23.1.0, )"
             },
             "Serilog": {
               "target": "Package",

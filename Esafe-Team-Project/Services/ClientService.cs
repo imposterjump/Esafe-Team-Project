@@ -17,6 +17,8 @@ using Esafe_Team_Project.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Reflection;
+using SelectPdf;
+using System.Drawing;
 
 namespace Esafe_Team_Project.Services
 {
@@ -457,6 +459,65 @@ namespace Esafe_Team_Project.Services
             Random random = new Random();
             double balance = random.Next(100, 10000000);
             return balance;
+        }
+
+        public async Task<string> ReadTextAsync(string filePath)
+        {
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                return await reader.ReadToEndAsync();
+            }
+        }
+        public async Task<string> CreateAsync(string name, IDictionary<string, string> dictionary)
+        {
+            Console.WriteLine("CreateAsync from TemplateService is called for the template " + name);
+            string directoryName = Directory.GetCurrentDirectory();
+            string text = await ReadTextAsync(directoryName + Path.DirectorySeparatorChar + "HtmlPreviews" + Path.DirectorySeparatorChar + name);
+            
+            foreach (KeyValuePair<string, string> item in dictionary)
+            {
+                text = text.Replace("{{" + item.Key + "}}", item.Value);
+            }
+
+            return text;
+        }
+        public async Task<byte[]> GetTransactionPDF(int transaction_id)
+        {
+           var transaction= await _dbContext.Transfers.FindAsync(transaction_id);
+            if (transaction != null)
+            {
+                // getting transaction infos and making the dictionary to  file the html placeholders
+                var sender= await _dbContext.Clients.FindAsync(transaction.SenderId);
+                var receiver = await _dbContext.Clients.FindAsync(transaction.RecieverId);
+                var data = new Dictionary<string, string>();
+                data.Add("SenderName", sender.FirstName+sender.LastName);
+                data.Add("ReceiverName", receiver.FirstName + receiver.LastName);
+                data.Add("Amount", transaction.Amount.ToString());
+                data.Add("TransactionID", transaction_id.ToString());
+                data.Add("Date", transaction.Date.ToString());
+                
+                Console.WriteLine("HTMLToPDF function from QRCodeService is called to generate a ticket from the template " + "Transactionpage");
+                HtmlToPdf converter = new HtmlToPdf();
+                converter.Options.PdfPageSize = PdfPageSize.Custom;
+                converter.Options.PdfPageCustomSize = new SizeF(400f, 400f);
+                string htmlString = await CreateAsync("Transactionpage.html", data); 
+                Console.WriteLine(htmlString);  
+                string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                string baseUrl = directoryName + Path.DirectorySeparatorChar + "Templates" + Path.DirectorySeparatorChar + "imgs";
+                PdfDocument pdfDocument = converter.ConvertHtmlString(htmlString, baseUrl);
+                MemoryStream memoryStream = new MemoryStream();
+                byte[] result = pdfDocument.Save();
+                pdfDocument.Close();
+                memoryStream.Position = 0L;
+
+                return result;
+
+            }
+            else
+            {
+                return null;
+            }
+            
         }
     }
 }
