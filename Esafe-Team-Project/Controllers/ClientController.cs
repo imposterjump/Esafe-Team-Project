@@ -45,7 +45,6 @@ namespace Esafe_Team_Project.Controllers
         [HttpGet]
         public async Task<ActionResult<ClientDisplayDto>> GetClients()
         {
-            //Using Service:
             Console.WriteLine("entered get clients controller");
             var data = await _service.GetAll();
             if (data == null)
@@ -123,6 +122,8 @@ namespace Esafe_Team_Project.Controllers
                 return StatusCode(500, "An error occured while registering");
             }
         }
+
+
         [HttpGet("otp/resend")]
         public async Task<IActionResult> ResendOTP( string username)
         {
@@ -138,7 +139,8 @@ namespace Esafe_Team_Project.Controllers
 
             return Ok();
         }
-            [HttpGet("verify")]
+
+        [HttpGet("verify")]
         public async Task<IActionResult> VerifyClient(short otp, string username)
         {
             var client = await _dbContext.Clients.Where(c => c.Username == username).FirstOrDefaultAsync();
@@ -164,6 +166,8 @@ namespace Esafe_Team_Project.Controllers
             await _dbContext.SaveChangesAsync();
             return Ok();
         }
+
+
         [HttpPost("AddAddress")]
         public async Task<ActionResult> AddAddress(int id, AddressDto address)
         {
@@ -272,7 +276,7 @@ namespace Esafe_Team_Project.Controllers
 
 
         [Authorize(Role.Client)]
-        [HttpGet("GetCreditCards")]
+        [HttpGet("GetMyCreditCards")]
         public async Task<ActionResult<List<CreditCardDto>>> GetCreditCardDetails()
         {
             try
@@ -285,7 +289,7 @@ namespace Esafe_Team_Project.Controllers
                 }
                 else
                 {
-                    return NotFound("You don't have any credit cards");
+                    return NotFound("You don't have any credit cards.");
                 }
             }
             catch (Exception ex)
@@ -297,7 +301,7 @@ namespace Esafe_Team_Project.Controllers
         }
 
         [Authorize(Role.Client)]
-        [HttpGet("GetCertificates")]
+        [HttpGet("GetMyCertificates")]
         public async Task<ActionResult<List<CertificateDto>>> GetCertificateDetails()
         {
             try
@@ -310,7 +314,7 @@ namespace Esafe_Team_Project.Controllers
                 }
                 else
                 {
-                    return NotFound("You don't have any certificates");
+                    return NotFound("You don't have any certificates.");
                 }
             }
             catch (Exception ex)
@@ -320,12 +324,14 @@ namespace Esafe_Team_Project.Controllers
 
             }
         }
+
+
         [Authorize(Role.Client)]
-        [HttpPost("transfer_money")]
-        public async Task<ActionResult<Transfer>> transfer_money(double amount , int receiver_id)
+        [HttpPost("Transfer-Amount")]
+        public async Task<ActionResult<Transfer>> TransferMoney(double amount , int receiver_id)
         {
             var client= Client;
-            var result = await _service.tranfermoney(amount, client.Id, receiver_id);
+            var result = await _service.transferMoney(amount, client.Id, receiver_id);
             if(result != null)
             {
                 return Ok(result);
@@ -336,17 +342,18 @@ namespace Esafe_Team_Project.Controllers
             }
         }
 
+
         [Authorize(Role.Client)]
-        [HttpPost("apply_for_a_certificate")]
+        [HttpPost("CertificateApplication")]
         public async Task<ActionResult<(string,Certificate)>> certificate_app(CertificateReqDto c1)
-        
         {
-            Console.WriteLine(" i am in the controller");
             var client = Client;
             var c2 = _mapper.Map<Certificate>(c1);
             var result = await _service.add_certificate(client.Id, c2);
             return Ok(result);
         }
+
+
         [HttpPost("CreditCardApplication (Silver,Gold,Platinum)")]
         public async Task<ActionResult> CreditCardApp(CreditCardReqDto creditCardReq)
 
@@ -354,29 +361,28 @@ namespace Esafe_Team_Project.Controllers
             var client = Client;
             var creditCard = _mapper.Map<CreditCard>(creditCardReq);
             var result = await _service.addCreditCard(client.Id, creditCard);
-            return Ok("your application is pending");
+            return Ok("Your application is pending..");
         }
+
+
         [Authorize(Role.Client)]
-        [HttpGet("transaction_to_pdf")]
+        [HttpGet("Transaction_To_PDF")]
         public async Task<IActionResult> transferSearch(int transactionid)
         {
-            
-            
-            var pdftransaction= await _service.GetTransactionPDF(transactionid);
+            var pdftransaction= await _service.GetTransferPDF(transactionid);
             if (pdftransaction!= null)
             {
-                
-                    return File(pdftransaction, "application/pdf", "transaction" + ".pdf");
-                
-
+                return File(pdftransaction, "application/pdf", "transfer" + ".pdf");
             }
             else
             {
-                return BadRequest("Ticket Not Found");
+                return BadRequest("Transfer Not Found");
             }
         }
+
+
         [Authorize(Role.Client)]
-        [HttpGet("CreditCard_to_pdf")]
+        [HttpGet("CreditCard_To_PDF")]
         public async Task<IActionResult> CreditCardSearch(int creditcardid)
         {
 
@@ -394,8 +400,10 @@ namespace Esafe_Team_Project.Controllers
                 return BadRequest("Ticket Not Found");
             }
         }
+
+
         [Authorize(Role.Client)]
-        [HttpGet("Certificate_to_pdf")]
+        [HttpGet("Certificate_To_PDF")]
         public async Task<IActionResult> CertificateSearch(int creditcardid)
         {
 

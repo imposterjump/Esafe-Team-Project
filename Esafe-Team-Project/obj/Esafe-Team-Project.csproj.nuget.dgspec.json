@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\impos\\OneDrive\\Desktop\\ESafe-Proj-Final-Wallahy\\Esafe-Team-Project\\Esafe-Team-Project\\Esafe-Team-Project.csproj": {}
+    "D:\\VS 2022 Projects\\FINALeSafe\\Esafe-Team-Project\\Esafe-Team-Project\\Esafe-Team-Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\impos\\OneDrive\\Desktop\\ESafe-Proj-Final-Wallahy\\Esafe-Team-Project\\Esafe-Team-Project\\Esafe-Team-Project.csproj": {
+    "D:\\VS 2022 Projects\\FINALeSafe\\Esafe-Team-Project\\Esafe-Team-Project\\Esafe-Team-Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\impos\\OneDrive\\Desktop\\ESafe-Proj-Final-Wallahy\\Esafe-Team-Project\\Esafe-Team-Project\\Esafe-Team-Project.csproj",
+        "projectUniqueName": "D:\\VS 2022 Projects\\FINALeSafe\\Esafe-Team-Project\\Esafe-Team-Project\\Esafe-Team-Project.csproj",
         "projectName": "Esafe-Team-Project",
-        "projectPath": "C:\\Users\\impos\\OneDrive\\Desktop\\ESafe-Proj-Final-Wallahy\\Esafe-Team-Project\\Esafe-Team-Project\\Esafe-Team-Project.csproj",
-        "packagesPath": "C:\\Users\\impos\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\impos\\OneDrive\\Desktop\\ESafe-Proj-Final-Wallahy\\Esafe-Team-Project\\Esafe-Team-Project\\obj\\",
+        "projectPath": "D:\\VS 2022 Projects\\FINALeSafe\\Esafe-Team-Project\\Esafe-Team-Project\\Esafe-Team-Project.csproj",
+        "packagesPath": "C:\\Users\\shahd\\.nuget\\packages\\",
+        "outputPath": "D:\\VS 2022 Projects\\FINALeSafe\\Esafe-Team-Project\\Esafe-Team-Project\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\impos\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\shahd\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

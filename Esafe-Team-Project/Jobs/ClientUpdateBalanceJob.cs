@@ -17,10 +17,7 @@ namespace Esafe_Team_Project.Jobs
             _dbContext = dbContext;
 
         }
-        
-        
        
-
         public async Task Execute(IJobExecutionContext context)
         {
             var result = await _dbContext.Clients.ToListAsync();

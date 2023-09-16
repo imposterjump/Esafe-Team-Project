@@ -95,9 +95,6 @@ namespace Esafe_Team_Project.Services
             return tokenHandler.WriteToken(token);
         }
 
-
-
-
         private string randomTokenString()
         {
             using var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
@@ -120,7 +117,6 @@ namespace Esafe_Team_Project.Services
 
 
 
-        //add client
         public async Task<Client> AddClient(ClientDto client)
         {
             Console.WriteLine("eneterd service");
@@ -176,7 +172,7 @@ namespace Esafe_Team_Project.Services
                         {
                             _dbContext.Clients.Add(newClient);
                             _dbContext.SaveChanges();
-                            await _mailer.SendAsync(newClient.Email, "Bank | Verification Code.", " Here is your verification code " + newClient.OTP.ToString());
+                            await _mailer.SendAsync(newClient.Email, "Bank | Verification Code.", "Your verification code is  " + newClient.OTP.ToString());
                             Console.WriteLine("client added successfully");
                         }
                         catch (Exception ex)
@@ -278,7 +274,6 @@ namespace Esafe_Team_Project.Services
 
         public async Task<List<ClientDisplayDto>> GetAll()
         {
-            Console.WriteLine("enetered get all clients service");
             var clients = await _dbContext.Clients.Include(_ => _.ClientAddresses).Include(_ => _.ClientCertificates).ToListAsync();
             Console.WriteLine(clients.ToString());
             List<ClientDisplayDto> clientsDto = _mapper.Map<List<ClientDisplayDto>>(clients);
@@ -372,7 +367,7 @@ namespace Esafe_Team_Project.Services
             }
             else
             {
-                Console.WriteLine("this client has no credit cards");
+                Console.WriteLine("This client has no credit cards");
                 return null;
             }
 
@@ -389,16 +384,16 @@ namespace Esafe_Team_Project.Services
             }
             else
             {
-                Console.WriteLine("this client has no certificates");
+                Console.WriteLine("This client has no certificates");
                 return null;
             }
 
 
         }
 
-        public async Task<ActionResult<Transfer>> tranfermoney(double amount, int sender_id, int receiver_id)
+        public async Task<ActionResult<Transfer>> transferMoney(double amount, int sender_id, int receiver_id)
         {
-            if(amount <= 0||sender_id == null||receiver_id==null) 
+            if(amount <= 0||sender_id == 0||receiver_id == 0) 
             {
                 return null;
             }
@@ -406,7 +401,7 @@ namespace Esafe_Team_Project.Services
             {
                 var sender = await _dbContext.Clients.FindAsync(sender_id);
                 var reciever = await _dbContext.Clients.FindAsync(receiver_id);
-                if(sender.balance<amount)
+                if(sender.balance < amount)
                 {
                     return null;
                 }
@@ -466,7 +461,7 @@ namespace Esafe_Team_Project.Services
         public double GenerateBalance()
         {
             Random random = new Random();
-            double balance = random.Next(100, 10000000);
+            double balance = random.Next(10000, 10000000);
             return balance;
         }
 
@@ -490,7 +485,7 @@ namespace Esafe_Team_Project.Services
 
             return text;
         }
-        public async Task<byte[]> GetTransactionPDF(int transaction_id)
+        public async Task<byte[]> GetTransferPDF(int transaction_id)
         {
            var transaction= await _dbContext.Transfers.FindAsync(transaction_id);
             if (transaction != null)
