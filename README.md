@@ -1,3 +1,3 @@
-# Esafe-Team-Project
-this project is made by shahd khaled, jana hani and bassem mohamed
-this is an online banking .net 6 back end only project with full validations on admin and client functions,login and register,and credit card and certificate applications and transfers.
+# eSafe-Project
+This is a backend online banking project named eSafe created by Shahd Khaled, Jana Hani and Bassem Mohamed.
+This project utilized .NET 6 and is equipped with full validations on admin and client functions, login and registration as well as credit card and certificate applications and transfers.
